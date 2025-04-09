@@ -21,27 +21,27 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.10, <4.0"
-lxml = "^4.9.1"
-bs4 = "^0.0.1"
-httpx = "^0.23.0"
+python = ">=3.11, <4.0"
+lxml = "^5.3.2"
+beautifulsoup4 = "^4.13.3"
+httpx = "^0.28.1"
 orjson = {optional = true, version = "^3.7.8"}
 
-[tool.poetry.dev-dependencies]
-black = "^22.6.0"
-pytest = "^7.1.2"
-isort = {extras = ["colors"], version = "^5.10.1"}
-coverage = {extras = ["toml"], version = "^6.4.2"}
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+pytest = "^8.3.5"
+pytest-asyncio = "^0.26.0"
+respx = "^0.22.0"
+isort = {extras = ["colors"], version = "^6.0.1"}
+coverage = {extras = ["toml"], version = "^6.5.0"}
+coveralls = "^3.3.1"
 pydocstyle = "^6.1.1"
-flake8 = "^4.0.1"
-respx = "^0.19.2"
-pytest-asyncio = "^0.19.0"
-PyMuPDF = "^1.20.1"
-flake8-docstrings = "^1.6.0"
+flake8 = "^7.2.0"
+flake8-docstrings = "^1.7.0"
+PyMuPDF = "^1.25.5"
 Sphinx = "^5.0.2"
 myst-parser = "^0.18.0"
 furo = "^2022.6.21"
-coveralls = "^3.3.1"
 
 [tool.poetry.extras]
 json = ["orjson"]

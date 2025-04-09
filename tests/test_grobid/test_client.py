@@ -13,7 +13,7 @@ class TestClient:
     import fitz
 
     with fitz.open(filetype="pdf") as test_pdf:
-        # Required to save pdf
+        # Required to save PDF
         test_pdf.new_page()
         test_obj: bytes = test_pdf.tobytes()
 
@@ -39,7 +39,7 @@ class TestClient:
             c.sync_request()
 
         # 400
-        respx.mock.post(base_url).mock(return_value=httpx.Response(400))
+        respx.post(base_url).mock(return_value=httpx.Response(400))
         with pytest.raises(
             GrobidClientError,
             match="Wrong request, missing parameters, missing header",
@@ -47,7 +47,7 @@ class TestClient:
             c.sync_request()
 
         # 500
-        respx.mock.post(base_url).mock(return_value=httpx.Response(500))
+        respx.post(base_url).mock(return_value=httpx.Response(500))
         with pytest.raises(
             GrobidClientError,
             match="Internal service error",
@@ -55,7 +55,7 @@ class TestClient:
             c.sync_request()
 
         # 503
-        respx.mock.post(base_url).mock(return_value=httpx.Response(503))
+        respx.post(base_url).mock(return_value=httpx.Response(503))
         with pytest.raises(
             GrobidClientError,
             match="Service not available",
@@ -63,7 +63,7 @@ class TestClient:
             c.sync_request()
 
         # 200
-        respx.mock.post(base_url).mock(return_value=httpx.Response(200))
+        respx.post(base_url).mock(return_value=httpx.Response(200))
         assert c.sync_request().status_code == 200
 
     def test_sync_invalid_request(self):
@@ -83,12 +83,12 @@ class TestClient:
         c = Client(base_url=base_url, form=self.form, timeout=self.timeout)
 
         # 203
-        respx.mock.post(base_url).mock(return_value=httpx.Response(203))
+        respx.post(base_url).mock(return_value=httpx.Response(203))
         with pytest.raises(GrobidClientError, match="Content couldn't be extracted"):
             await c.asyncio_request()
 
         # 400
-        respx.mock.post(base_url).mock(return_value=httpx.Response(400))
+        respx.post(base_url).mock(return_value=httpx.Response(400))
         with pytest.raises(
             GrobidClientError,
             match="Wrong request, missing parameters, missing header",
@@ -96,7 +96,7 @@ class TestClient:
             await c.asyncio_request()
 
         # 500
-        respx.mock.post(base_url).mock(return_value=httpx.Response(500))
+        respx.post(base_url).mock(return_value=httpx.Response(500))
         with pytest.raises(
             GrobidClientError,
             match="Internal service error",
@@ -104,7 +104,7 @@ class TestClient:
             await c.asyncio_request()
 
         # 503
-        respx.mock.post(base_url).mock(return_value=httpx.Response(503))
+        respx.post(base_url).mock(return_value=httpx.Response(503))
         with pytest.raises(
             GrobidClientError,
             match="Service not available",
@@ -112,7 +112,7 @@ class TestClient:
             await c.asyncio_request()
 
         # 200
-        respx.mock.post(base_url).mock(return_value=httpx.Response(200))
+        respx.post(base_url).mock(return_value=httpx.Response(200))
         r = await c.asyncio_request()
         assert r.status_code == 200
 
